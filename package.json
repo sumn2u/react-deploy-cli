@@ -1,0 +1,42 @@
+{
+  "name": "react-deploy",
+  "description": "A deployment pipeline for react apps",
+  "version": "0.0.1",
+  "directories": {
+    "doc": "doc",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "node node_modules/mocha/bin/mocha \"node-tests/**/*-test.js\"",
+    "autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec \"node-tests/**/*-test.js\""
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "author": "Suman Kunwar",
+  "license": "MIT",
+  "devDependencies": {
+    "chai": "^1.9.2",
+    "chai-as-promised": "^4.1.1",
+    "github": "0.2.3",
+    "mocha": "^2.0.1",
+    "mocha-eslint": "^4.1.0"
+  },
+  "keywords": [
+    "react-addon",
+    "react-deploy"
+  ],
+  "react-addon": {
+    "configPath": "tests/dummy/config"
+  },
+  "dependencies": {
+    "chalk": "^1.1.3",
+    "core-object": "^2.0.0",
+    "dag-map": "^2.0.1",
+    "dotenv": "^1.2.0",
+    "react-deploy-progress": "^0.0.1",
+    "lodash": "^4.0.0",
+    "rsvp": "^3.3.3",
+    "silent-error": "^1.0.0"
+  }
+}
