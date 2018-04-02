@@ -1,48 +1,83 @@
-var path                = require('path');
-var commands            = require('./lib/commands');
+#!/usr/bin/env node
 
-module.exports = {
-  name: 'react-deploy',
+"use strict";
 
-  includedCommands: function() {
-    return commands;
-  },
+var chalk       = require('chalk');
+var clear       = require('clear');
+var CLI         = require('clui');
+var figlet      = require('figlet');
+var inquirer    = require('inquirer');
+var Preferences = require('preferences');
+var Spinner     = CLI.Spinner;
+// var GitHubApi   = require('github');
+var _           = require('lodash');
+// var git         = require('simple-git')();
+var touch       = require('touch');
+var fs          = require('fs');
+var commands    = require('./lib/commands');
+var path = require('path');
+var exec = require('child_process').exec;
+var files       = require('./lib/files');
+const program = require('commander'),
+pkg = require('./package.json');
 
-  blueprintsPath: function() {
-    return path.join(__dirname, 'blueprints');
-  },
+/**
+ * list function definition
+ *
+ */
+let hydrawebAct = (directory,options)  => {
+  //  console.log(options, 'options');
+  //  console.log(chalk.red(directory+"xf"));
+    const cmd = 'ls';
+    let params = [];
 
-  postBuild: function(result) {
-    var _this = this;
-    if (!this.app) {
-      // You will need ember-cli >= 1.13 to use ember-cli-deploy's postBuild integration.
-      // This is because prior to 1.13, `this.app` is not available in the postBuild hook.
-      return;
-    }
-    var options = this.app.options.emberCLIDeploy || {};
+    if (options.all) params.push("a");
+    if (options.long) params.push("l");
+    // console.log("options ==>", options, params);
+    let parameterizedCommand = params.length
+                                ? cmd + ' _' + params.join('')
+                                : cmd ;
+    if (directory) parameterizedCommand += ' ' + directory ;
 
-    var deployTarget = options.runOnPostBuild;
-    if (deployTarget) {
-      var ReadConfigTask = require('./lib/tasks/read-config');
-      var readConfig = new ReadConfigTask({
-        project: this.project,
-        deployTarget: deployTarget,
-        deployConfigFile: options.configFile
-      });
-      return readConfig.run().then(function(config){
-        var DeployTask = require('./lib/tasks/deploy');
-        var deploy = new DeployTask({
-          project: _this.project,
-          ui: _this.ui,
-          deployTarget: deployTarget,
-          config: config,
-          shouldActivate: options.shouldActivate,
-          commandOptions: {
-            buildDir: result.directory
-          }
-        });
-        return deploy.run();
-      });
-    }
-  }
+    let output = (error, stdout, stderr) => {
+        if (error) console.log(chalk.red.bold.underline("exec error:") + error);
+        if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
+        if (stderr) console.log(chalk.red("Error: ") + stderr);
+    };
+    // console.log(parameterizedCommand,'parameterizedCommand');
+    // let parameterizedCommandNormalize = parameterizedCommand.split('-').join('_')
+    // console.log(parameterizedCommandNormalize,'parameterizedCommand');
+    exec(parameterizedCommand,output);
+
 };
+
+// create html bolierplate
+var argv = require('minimist')(process.argv.slice(2))
+
+program
+    .version(pkg.version)
+    .command('init','initialize configuration file for react-deploy')
+    .command('deploy', 'start to deploy dist folder to s3 bucket')
+    .command('deploy environment', 'deploy using different environments')
+    .command('revisions', 'display deployed revisions')
+    .command('revisions [environment]', 'display deployed revisions on based of environment')
+    .command('activate', 'activate current file')
+    .command('activate [environment]', 'activate file on based of environment')
+    .command('list [directory]')
+    .option('-a, --all', 'List all')
+    .option('-l, --long','Long list format')
+    .action(hydrawebAct);
+
+
+program.parse(process.argv);
+
+
+// if program was called with no arguments, show help.
+if (program.args.length === 0) program.help();
+
+clear();
+console.log(
+  chalk.yellow(
+    figlet.textSync('react-deploy', { horizontalLayout: 'full' })
+  )
+)

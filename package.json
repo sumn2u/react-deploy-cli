@@ -1,13 +1,19 @@
 {
-  "name": "react-deploy",
+  "name": "react-deploy-cli",
   "description": "A deployment pipeline for react apps",
-  "version": "0.0.1",
+  "version": "0.0.2",
+  "main": "index.js",
+  "bin": {
+    "react-deploy": "./index.js"
+  },
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha \"node-tests/**/*-test.js\"",
+    "react-deploy-init": "./lib/commands/init.js",
+    "react-deploy-deploy": "node ./lib/deploy.js",
     "autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec \"node-tests/**/*-test.js\""
   },
   "engines": {
@@ -20,7 +26,9 @@
     "chai-as-promised": "^4.1.1",
     "github": "0.2.3",
     "mocha": "^2.0.1",
-    "mocha-eslint": "^4.1.0"
+    "mocha-eslint": "^4.1.0",
+    "react-deploy-revision-data": "0.0.1",
+    "s3": "^4.4.0"
   },
   "keywords": [
     "react-addon",
@@ -35,8 +43,18 @@
     "dag-map": "^2.0.1",
     "dotenv": "^1.2.0",
     "react-deploy-progress": "^0.0.1",
-    "lodash": "^4.0.0",
     "rsvp": "^3.3.3",
-    "silent-error": "^1.0.0"
+    "silent-error": "^1.0.0",
+    "clear": "0.0.1",
+    "clui": "^0.3.1",
+    "commander": "^2.9.0",
+    "figlet": "^1.2.0",
+    "github": "^6.0.2",
+    "inquirer": "^1.2.2",
+    "lodash": "^4.16.6",
+    "minimist": "^1.1.0",
+    "preferences": "^0.2.1",
+    "simple-git": "^1.40.0",
+    "touch": "^1.0.0"
   }
 }
