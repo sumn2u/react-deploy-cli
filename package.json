@@ -13,7 +13,8 @@
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha \"node-tests/**/*-test.js\"",
     "react-deploy-init": "./lib/commands/init.js",
-    "react-deploy-deploy": "node ./lib/deploy.js",
+    "react-deploy-start": "node ./lib/start.js",
+    "react-deploy-revisions": "node ./lib/revisions.js",
     "autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec \"node-tests/**/*-test.js\""
   },
   "engines": {
@@ -22,13 +23,20 @@
   "author": "Suman Kunwar",
   "license": "MIT",
   "devDependencies": {
+    "aws-sdk": "^2.218.1",
     "chai": "^1.9.2",
     "chai-as-promised": "^4.1.1",
+    "cli-table2": "^0.2.0",
+    "fd-slicer": "^1.0.1",
+    "findit2": "^2.2.3",
     "github": "0.2.3",
     "mocha": "^2.0.1",
     "mocha-eslint": "^4.1.0",
+    "moment": "^2.22.0",
+    "pend": "^1.2.0",
+    "react-deploy": "0.0.7",
     "react-deploy-revision-data": "0.0.1",
-    "s3": "^4.4.0"
+    "streamsink": "^1.2.0"
   },
   "keywords": [
     "react-addon",

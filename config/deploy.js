@@ -1,11 +1,17 @@
 /* eslint-env node */
 'use strict';
 
+/* eslint-env node */
+'use strict';
+
 module.exports = function(deployTarget) {
   let ENV = {
     build: {
         localDir: 'build/',
-        deleteRemoved: false
+        deleteRemoved: false,
+        s3Params: {
+          Bucket: ''
+        },
     },
     s3:{
       accessKeyId: '',

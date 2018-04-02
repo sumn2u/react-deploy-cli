@@ -3,7 +3,20 @@
 
 module.exports = function(deployTarget) {
   let ENV = {
-    build: {}
+    build: {
+        localDir: 'build/',
+        deleteRemoved: false,
+        s3Params: {
+          Bucket: ''
+        },
+    },
+    s3:{
+      accessKeyId: '',
+      secretAccessKey: '',
+      region: 'us-east-1',
+      sslEnabled: true,
+      Bucket:''
+    }
     // include other plugin configuration that applies to all deploy targets here
   };
 
