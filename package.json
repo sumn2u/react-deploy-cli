@@ -35,7 +35,7 @@
     "mocha-eslint": "^4.1.0",
     "moment": "^2.22.0",
     "pend": "^1.2.0",
-    "react-deploy": "0.0.10",
+    "react-deploy": "0.0.11",
     "react-deploy-revision-data": "0.0.1",
     "streamsink": "^1.2.0"
   },
