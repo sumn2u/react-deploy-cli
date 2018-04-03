@@ -21,3 +21,4 @@ deploy_test.json
 NERD_tree_2
 *.tgz
 /tmp-delete-excluded-test
+/config

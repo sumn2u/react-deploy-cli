@@ -1,7 +1,7 @@
 {
   "name": "react-deploy-cli",
   "description": "A deployment pipeline for react apps",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "index.js",
   "bin": {
     "react-deploy": "./index.js"
@@ -12,9 +12,10 @@
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha \"node-tests/**/*-test.js\"",
-    "react-deploy-init": "./lib/commands/init.js",
-    "react-deploy-start": "node ./lib/start.js",
-    "react-deploy-revisions": "node ./lib/revisions.js",
+    "setup": "./lib/commands/init.js",
+    "deploy":"node ./lib/deploy.js",
+    "list":"node ./lib/revisions.js",
+    "activate":"node ./lib/activate.js",
     "autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec \"node-tests/**/*-test.js\""
   },
   "engines": {
@@ -55,7 +56,6 @@
     "silent-error": "^1.0.0",
     "clear": "0.0.1",
     "clui": "^0.3.1",
-    "commander": "^2.9.0",
     "figlet": "^1.2.0",
     "github": "^6.0.2",
     "inquirer": "^1.2.2",

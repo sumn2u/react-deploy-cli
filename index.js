@@ -20,64 +20,148 @@ var exec = require('child_process').exec;
 var files       = require('./lib/files');
 const program = require('commander'),
 pkg = require('./package.json');
+let log = console.log;
 
 /**
  * list function definition
  *
  */
-let hydrawebAct = (directory,options)  => {
+
+
+program
+.version(pkg.version)
+// .option('-C, --chdir <path>', 'change the working directory')
+// .option('-c, --config <path>', 'set config path. defaults to ./deploy.conf')
+// .option('-T, --no-tests', 'ignore test hook')
+
+program
+.command('setup')
+.description('run deployment configuration file')
+.action(function(cmd) {
+  // let parameterizedCommand = 'npm run ' + cmd
+  setupAct(cmd)
+});
+
+program
+.command('deploy [env]')
+.description('deploy code to s3 bucket with specific environment')
+.action(function(cmd) {
+  let args = process.argv.slice(2)
+    if(args.indexOf('deploy') !== -1) {
+      // let args = process.argv.slice(2)
+      // console.log('exec "%s"', args, cmd);
+      // var exec = require('child_process').execSync;
+      log()
+      console.log(
+         chalk.yellow('Checking configuration file' )
+      )
+      log()
+      let output = (error, stdout, stderr) => {
+        if (error) console.log(chalk.red.bold.underline("exec error:") + error);
+        if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
+        if (stderr) console.log(chalk.red("Error: ") + stderr);
+      };
+      let parameterizedCommand = 'npm run deploy ' + cmd;
+      exec(parameterizedCommand,output);
+    }
+});
+
+
+
+program
+.command('list [env]')
+.description('list deployed version from s3')
+.action(function(cmd) {
+  let args = process.argv.slice(2)
+  if(args.indexOf('list') !== -1) {
+    // let args = process.argv.slice(2)
+    // console.log('exec "%s"', args, cmd);
+    // var exec = require('child_process').execSync;
+    log()
+    console.log(
+       chalk.yellow('Checking configuration file' )
+    )
+    log()
+    let output = (error, stdout, stderr) => {
+      if (error) console.log(chalk.red.bold.underline("exec error:") + error);
+      if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
+      if (stderr) console.log(chalk.red("Error: ") + stderr);
+    };
+    let parameterizedCommand = 'npm run list ' + cmd;
+    exec(parameterizedCommand,output);
+  }
+});
+
+
+program
+.command('activate <key> [env]')
+.description('activate version with or specific environment')
+.action(function(cmd, opt) {
+  // console.log('exec "%s"', cmd, opt);
+  // var exec = require('child_process').execSync;
+  let args = process.argv.slice(2)
+  if(args.indexOf('activate') !== -1) {
+      log()
+      console.log(
+        chalk.yellow('Checking configuration file' )
+      )
+      log()
+      let output = (error, stdout, stderr) => {
+        if (error) console.log(chalk.red.bold.underline("exec error:") + error);
+        if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
+        if (stderr) console.log(chalk.red("Error: ") + stderr);
+    };
+    let parameterizedCommand = 'npm run activate ' + cmd + ' ' + opt;
+    exec(parameterizedCommand,output);
+  }
+});
+
+let setupAct = (cmd)  => {
   //  console.log(options, 'options');
   //  console.log(chalk.red(directory+"xf"));
-    const cmd = 'ls';
-    let params = [];
-
-    if (options.all) params.push("a");
-    if (options.long) params.push("l");
-    // console.log("options ==>", options, params);
-    let parameterizedCommand = params.length
-                                ? cmd + ' _' + params.join('')
-                                : cmd ;
-    if (directory) parameterizedCommand += ' ' + directory ;
+  let args = process.argv.slice(2)
+  if(args.indexOf('setup') !== -1) {
+    clear();
+    console.log(
+      chalk.yellow(
+        figlet.textSync('react-deploy', { horizontalLayout: 'full' })
+      )
+    )
 
     let output = (error, stdout, stderr) => {
         if (error) console.log(chalk.red.bold.underline("exec error:") + error);
         if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
         if (stderr) console.log(chalk.red("Error: ") + stderr);
     };
-    // console.log(parameterizedCommand,'parameterizedCommand');
-    // let parameterizedCommandNormalize = parameterizedCommand.split('-').join('_')
-    // console.log(parameterizedCommandNormalize,'parameterizedCommand');
+   
+     let parameterizedCommand = 'npm run ' + args;
+
     exec(parameterizedCommand,output);
+  }
+
+
 
 };
 
-// create html bolierplate
-var argv = require('minimist')(process.argv.slice(2))
+// program
+// .command('teardown <dir> [otherDirs...]')
+// .description('run teardown commands')
+// .action(function(dir, otherDirs) {
+//   console.log('dir "%s"', dir);
+//   if (otherDirs) {
+//     otherDirs.forEach(function (oDir) {
+//       console.log('dir "%s"', oDir);
+//     });
+//   }
+// });
 
-program
-    .version(pkg.version)
-    .command('init','initialize configuration file for react-deploy')
-    .command('start', 'start to deploy dist folder to s3 bucket')
-    .command('start [environment]', 'deploy using different environments')
-    .command('revisions', 'display deployed revisions')
-    .command('revisions [environment]', 'display deployed revisions on based of environment')
-    .command('activate', 'activate current file')
-    .command('activate [environment]', 'activate file on based of environment')
-    .command('list [directory]')
-    .option('-a, --all', 'List all')
-    .option('-l, --long','Long list format')
-    .action(hydrawebAct);
-
+// program
+// .command('*')
+// .description('deploy the given env')
+// .action(function(env) {
+//   console.log('deploying "%s"', env);
+// });
 
 program.parse(process.argv);
 
-
-// if program was called with no arguments, show help.
 if (program.args.length === 0) program.help();
-
-clear();
-console.log(
-  chalk.yellow(
-    figlet.textSync('react-deploy', { horizontalLayout: 'full' })
-  )
-)
