@@ -1,7 +1,7 @@
 {
   "name": "react-deploy-cli",
   "description": "A deployment pipeline for react apps",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "index.js",
   "bin": {
     "react-deploy": "./index.js"

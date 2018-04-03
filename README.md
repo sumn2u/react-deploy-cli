@@ -26,7 +26,7 @@ This package doesn't build the app, make sure you use webpack or create reat app
 ## Install
 
 ```sh
-npm i -g react-deploy-cli -S
+npm i -g react-deploy-cli
 
 # or
 
@@ -124,7 +124,7 @@ Finished 'list:development' after 2ms
 ```
 To activate a revision use the revision key.
 
->  react-deploy list development
+>  react-deploy activate cba170b development
 
 ```
 
