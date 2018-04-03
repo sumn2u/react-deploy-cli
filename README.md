@@ -4,12 +4,15 @@
 
 > Create React App deployment to S3 bucket along with revision update or last revision activate
 
-![upload revisions](img/display-revisions.png)
+```
+                              _                 _                  _                 
+  _ __    ___    __ _    ___  | |_            __| |   ___   _ __   | |   ___    _   _ 
+ | '__|  / _ \  / _` |  / __| | __|  _____   / _` |  / _ \ | '_ \  | |  / _ \  | | | |
+ | |    |  __/ | (_| | | (__  | |_  |_____| | (_| | |  __/ | |_) | | | | (_) | | |_| |
+ |_|     \___|  \__,_|  \___|  \__|          \__,_|  \___| | .__/  |_|  \___/   \__, |
+                                                           |_|                  |___/ 
 
-> Activate any revisions
-
-![show revisions](img/showrevisions.png)
-
+```
 
 This package doesn't build the app, make sure you use webpack or create reat app to make the production build.
 
@@ -23,46 +26,118 @@ This package doesn't build the app, make sure you use webpack or create reat app
 ## Install
 
 ```sh
-npm i react-deploy-cli -S
+npm i -g react-deploy-cli -S
 
 # or
 
-yarn add react-deploy-cli
+yarn global add react-deploy-cli
 
 ```
 
 ## Usage
 > react-deploy
 ```
- Usage: react-deploy [options] [command]
+   Usage: react-deploy [options] [command]
 
-  Options:
-
-    -V, --version               output the version number
-    -h, --help                  output usage information
 
   Commands:
 
-    init                        initialize configuration file for react-deploy
-    deploy                      start to deploy dist folder to s3 bucket
-    deploy                      deploy using different environments
-    revisions                   display deployed revisions
-    revisions [environment]     display deployed revisions on based of environment
-    activate                    activate current file
-    activate [environment]      activate file on based of environment
-    list [options] [directory]
-    help [cmd]                  display help for [cmd]
+    setup                 run deployment configuration file
+    deploy [env]          deploy code to s3 bucket with specific environment
+    list [env]            list deployed version from s3
+    activate <key> [env]  activate version with or specific environment
+
+  Options:
+
+    -h, --help     output usage information
+    -V, --version  output the version number
+
+
 
 ```
+ To initialize setup file for react-deploy , go inside your react app project root directory and  use following command 
 
-> react-deploy init
+> react-deploy setup
 ```
-                              _                 _                  _                 
+                               _                 _                  _                 
   _ __    ___    __ _    ___  | |_            __| |   ___   _ __   | |   ___    _   _ 
  | '__|  / _ \  / _` |  / __| | __|  _____   / _` |  / _ \ | '_ \  | |  / _ \  | | | |
  | |    |  __/ | (_| | | (__  | |_  |_____| | (_| | |  __/ | |_) | | | | (_) | | |_| |
  |_|     \___|  \__,_|  \___|  \__|          \__,_|  \___| | .__/  |_|  \___/   \__, |
                                                            |_|                  |___/ 
+
+Result:
+> react-deploy-cli@0.0.3 setup /home/suman/react-deploy-cli
+> ./lib/commands/init.js
+
+
+✓ Deployment file created
+
+➡  Type help command to proceed further
+
+
+```
+Now inside config/deploy.js file put your s3 bucket name, along with ACCESSKEYID and SECERETKEY.
+
+After building your react app. It's time to deploy your app to S3 bucket.
+
+> react-deploy deploy development
+
+```
+
+Checking configuration file
+
+Result:
+> react-deploy-cli@0.0.3 deploy /home/suman/react-deploy-cli
+> node ./lib/deploy.js "development"
+
+
+Starting 'upload:development'...
+Finished 'upload:development' after 1ms
+
+Revision created successfuly 
+```
+It will upload your assests to the s3 bucket with uniquely generated file name. 
+![upload revisions](img/deploy.png)
+
+To get the list of displayed revisions file use following command
+
+>  react-deploy list development
+
+```
+
+Checking configuration file
+
+Result:
+> react-deploy-cli@0.0.3 deploy /home/suman/react-deploy-cli
+> node ./lib/revisions.js "development"
+
+Starting 'list:development'...
+Finished 'list:development' after 2ms
+
+┌───────────────────┬──────────────────────────────┐
+│ RevisionKey       │ Commit Date                  │
+├───────────────────┼──────────────────────────────┤
+│   index:cba170b   │ 2018/04/03 21:25:34          │
+└───────────────────┴──────────────────────────────┘
+ 
+```
+To activate a revision use the revision key.
+
+>  react-deploy list development
+
+```
+
+Checking configuration file
+
+Result:
+> react-deploy-cli@0.0.3 deploy /home/suman/react-deploy-cli
+> node ./lib/activate.js "cba170b" "development"
+
+Starting 'list:cba170b'...
+Finished 'list:cba170b' after 2ms
+
+Activating index file of key cba170b
 
 ```
 
