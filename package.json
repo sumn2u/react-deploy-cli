@@ -1,7 +1,7 @@
 {
   "name": "react-deploy-cli",
   "description": "A deployment pipeline for react apps",
-  "version": "0.0.5",
+  "version": "0.0.7",
   "main": "index.js",
   "bin": {
     "react-deploy": "./index.js"
@@ -12,11 +12,7 @@
   },
   "scripts": {
     "test": "node node_modules/mocha/bin/mocha \"node-tests/**/*-test.js\"",
-    "setup": "./lib/commands/init.js",
-    "deploy": "node ./lib/deploy.js",
-    "list": "node ./lib/revisions.js",
-    "activate": "node ./lib/activate.js",
-    "autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec \"node-tests/**/*-test.js\""
+    "react-deploy-autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec \"node-tests/**/*-test.js\""
   },
   "engines": {
     "node": ">= 0.10.0"
@@ -40,28 +36,31 @@
     "streamsink": "^1.2.0"
   },
   "keywords": [
-    "react-addon",
-    "react-deploy"
+    "react-cli",
+    "react-deploy",
+    "cli",
+    "react-activate-revisions"
   ],
   "react-addon": {
     "configPath": "tests/dummy/config"
   },
   "dependencies": {
     "chalk": "^1.1.3",
+    "clear": "0.0.1",
+    "clui": "^0.3.1",
+    "commander": "^2.15.1",
     "core-object": "^2.0.0",
     "dag-map": "^2.0.1",
     "dotenv": "^1.2.0",
-    "react-deploy-progress": "^0.0.1",
-    "rsvp": "^3.3.3",
-    "silent-error": "^1.0.0",
-    "clear": "0.0.1",
-    "clui": "^0.3.1",
     "figlet": "^1.2.0",
     "github": "^6.0.2",
     "inquirer": "^1.2.2",
     "lodash": "^4.16.6",
     "minimist": "^1.1.0",
     "preferences": "^0.2.1",
+    "react-deploy-progress": "^0.0.1",
+    "rsvp": "^3.3.3",
+    "silent-error": "^1.0.0",
     "simple-git": "^1.40.0",
     "touch": "^1.0.0"
   }

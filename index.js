@@ -15,12 +15,15 @@ var _           = require('lodash');
 var touch       = require('touch');
 var fs          = require('fs');
 var commands    = require('./lib/commands');
+// var start       = require('./lib/commands/init.js')
 var path = require('path');
 var exec = require('child_process').exec;
 var files       = require('./lib/files');
 const program = require('commander'),
 pkg = require('./package.json');
 let log = console.log;
+var path = require('path');
+let appRoot = path.resolve(__dirname);
 
 /**
  * list function definition
@@ -49,7 +52,7 @@ program
   let args = process.argv.slice(2)
     if(args.indexOf('deploy') !== -1) {
       // let args = process.argv.slice(2)
-      // console.log('exec "%s"', args, cmd);
+      // console.log('exec "%s"', argsl, cmd);
       // var exec = require('child_process').execSync;
       log()
       console.log(
@@ -61,8 +64,11 @@ program
         if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
         if (stderr) console.log(chalk.red("Error: ") + stderr);
       };
-      let parameterizedCommand = 'npm run deploy ' + cmd;
-      exec(parameterizedCommand,output);
+      var scriptPath =  path.join(appRoot, 'lib/deploy.js');
+      var setupCommand  = 'node ' + scriptPath + ' ' + cmd
+      exec(setupCommand,output);
+      // let parameterizedCommand = 'npm run deploy ' + cmd;
+      // exec(parameterizedCommand,output);
     }
 });
 
@@ -87,8 +93,11 @@ program
       if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
       if (stderr) console.log(chalk.red("Error: ") + stderr);
     };
-    let parameterizedCommand = 'npm run list ' + cmd;
-    exec(parameterizedCommand,output);
+    var scriptPath = path.join(appRoot, 'lib/revisions.js');
+    var setupCommand  = 'node ' + scriptPath + ' ' + cmd
+    exec(setupCommand,output);exec(setupCommand,output);
+    // let parameterizedCommand = 'npm run list ' + cmd;
+    // exec(parameterizedCommand,output);
   }
 });
 
@@ -111,8 +120,12 @@ program
         if (stdout) console.log(chalk.green.bold.underline("Result:") + stdout);
         if (stderr) console.log(chalk.red("Error: ") + stderr);
     };
-    let parameterizedCommand = 'npm run activate ' + cmd + ' ' + opt;
-    exec(parameterizedCommand,output);
+     
+    var scriptPath = path.join(appRoot, 'lib/activate.js');
+    var setupCommand  = 'node ' + scriptPath + ' ' +cmd + ' ' + opt
+    exec(setupCommand,output);exec(setupCommand,output);
+    // let parameterizedCommand = 'npm run activate ' + cmd + ' ' + opt;
+    // exec(parameterizedCommand,output);
   }
 });
 
@@ -127,6 +140,7 @@ let setupAct = (cmd)  => {
         figlet.textSync('react-deploy', { horizontalLayout: 'full' })
       )
     )
+    
 
     let output = (error, stdout, stderr) => {
         if (error) console.log(chalk.red.bold.underline("exec error:") + error);
@@ -134,9 +148,9 @@ let setupAct = (cmd)  => {
         if (stderr) console.log(chalk.red("Error: ") + stderr);
     };
    
-     let parameterizedCommand = 'npm run ' + args;
-
-    exec(parameterizedCommand,output);
+    //  let parameterizedCommand = 'node' + start;
+    var setupCommand = path.join(appRoot, '/lib/commands/init.js');
+    exec(setupCommand,output);
   }
 
 
