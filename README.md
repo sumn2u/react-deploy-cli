@@ -1,6 +1,7 @@
 # react-deploy-cli
 
-[![GitHub issues](https://img.shields.io/github/issues/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/issues) [![GitHub forks](https://img.shields.io/github/forks/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/network) [![GitHub stars](https://img.shields.io/github/stars/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/stargazers) [![GitHub license](https://img.shields.io/github/license/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/blob/master/LICENSE) [![Twitter](https://img.shields.io/twitter/url/https/github.com/sumn2u/react-deploy-cli.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fsumn2u%2Freact-deploy-cli)
+[![GitHub issues](https://img.shields.io/github/issues/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/issues) [![GitHub forks](https://img.shields.io/github/forks/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/network) [![GitHub stars](https://img.shields.io/github/stars/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/stargazers) [![GitHub license](https://img.shields.io/github/license/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/blob/master/LICENSE) [![Twitter]
+[![Build Status](https://travis-ci.org/sumn2u/react-deploy-cli.svg?branch=master)](https://travis-ci.org/sumn2u/react-deploy-cli) (https://img.shields.io/twitter/url/https/github.com/sumn2u/react-deploy-cli.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fsumn2u%2Freact-deploy-cli)
 
 >  Deploy react app to s3 and Cloudfront with versioning and activation features.
 
