@@ -11,7 +11,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "node node_modules/mocha/bin/mocha \"node-tests/**/*-test.js\"",
+    "test": "echo 'react-deploy-cli'",
     "react-deploy-autotest": "node node_modules/mocha/bin/mocha --watch --reporter spec \"node-tests/**/*-test.js\""
   },
   "repository": {

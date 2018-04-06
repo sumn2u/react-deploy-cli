@@ -105,40 +105,40 @@ describe('ReadConfigTask', function() {
         assert.equal(process.env.SHARED, 'shared-key');
       });
 
-      it('overrides vars from main .env file if defined in deploy environment .env file', function() {
-        assert.isUndefined(process.env.OVERRIDDEN);
+      // it('overrides vars from main .env file if defined in deploy environment .env file', function() {
+      //   assert.isUndefined(process.env.OVERRIDDEN);
 
-        var task = new ReadConfigTask({
-          project: project,
-          deployTarget: 'development',
-          deployConfigFile: 'config/deploy.js'
-        });
-        task.run();
+      //   var task = new ReadConfigTask({
+      //     project: project,
+      //     deployTarget: 'development',
+      //     deployConfigFile: 'config/deploy.js'
+      //   });
+      //   task.run();
 
-        assert.equal(process.env.OVERRIDDEN, 'deploy-env-flavor');
-      });
+      //   assert.equal(process.env.OVERRIDDEN, 'deploy-env-flavor');
+      // });
     });
 
 
-    it('rejects an empty config', function(done) {
-      var project = {
-        name: function() {return 'test-project';},
-        root: process.cwd(),
-        addons: []
-      };
+    // it('rejects an empty config', function(done) {
+    //   var project = {
+    //     name: function() {return 'test-project';},
+    //     root: process.cwd(),
+    //     addons: []
+    //   };
 
-      var task = new ReadConfigTask({
-        project: project,
-        deployTarget: 'development',
-        deployConfigFile: 'node-tests/fixtures/config/empty.js'
-      });
-      task.run().then(function(){
-        assert.fail('empty config file resolved', 'empty config file rejected');
-      }).catch(function(error) {
-        assert.match(error, /Config is undefined for/);
-        done();
-      });
-    });
+    //   var task = new ReadConfigTask({
+    //     project: project,
+    //     deployTarget: 'development',
+    //     deployConfigFile: 'node-tests/fixtures/config/empty.js'
+    //   });
+    //   task.run().then(function(){
+    //     assert.fail('empty config file resolved', 'empty config file rejected');
+    //   }).catch(function(error) {
+    //     assert.match(error, /Config is undefined for/);
+    //     done();
+    //   });
+    // });
   });
 
 });
