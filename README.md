@@ -2,7 +2,7 @@
 
 [![GitHub issues](https://img.shields.io/github/issues/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/issues) [![GitHub forks](https://img.shields.io/github/forks/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/network) [![GitHub stars](https://img.shields.io/github/stars/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/stargazers) [![GitHub license](https://img.shields.io/github/license/sumn2u/react-deploy-cli.svg)](https://github.com/sumn2u/react-deploy-cli/blob/master/LICENSE) [![Twitter](https://img.shields.io/twitter/url/https/github.com/sumn2u/react-deploy-cli.svg?style=social)](https://twitter.com/intent/tweet?text=Wow:&url=https%3A%2F%2Fgithub.com%2Fsumn2u%2Freact-deploy-cli)
 
-> Create React App deployment to S3 bucket along with revision update or last revision activate
+>  Deploy react app to s3 and Cloudfront with versioning and activation features.
 
 ```
                               _                 _                  _                 
@@ -14,7 +14,7 @@
 
 ```
 
-This package doesn't build the app, make sure you use webpack or create reat app to make the production build.
+This package doesn't build the app, instead use webpack or create-react-app to build your application instead.
 
 ## Table of Contents
 
@@ -37,7 +37,7 @@ yarn global add react-deploy-cli
 ## Usage
 > react-deploy
 ```
-   Usage: react-deploy [options] [command]
+ Usage: react-deploy [options] [command]
 
 
   Commands:
@@ -67,8 +67,6 @@ yarn global add react-deploy-cli
                                                            |_|                  |___/ 
 
 Result:
-> react-deploy-cli@0.0.3 setup /home/suman/react-deploy-cli
-> ./lib/commands/init.js
 
 
 ✓ Deployment file created
@@ -77,7 +75,7 @@ Result:
 
 
 ```
-Now inside config/deploy.js file put your s3 bucket name, along with ACCESSKEYID and SECERETKEY.
+It will automatically create a deploy.js file. Now inside deploy.js file put your s3 bucket name, along with ACCESSKEYID and SECERETKEY.
 
 After building your react app. It's time to deploy your app to S3 bucket.
 
@@ -88,65 +86,60 @@ After building your react app. It's time to deploy your app to S3 bucket.
 Checking configuration file
 
 Result:
-> react-deploy-cli@0.0.3 deploy /home/suman/react-deploy-cli
-> node ./lib/deploy.js "development"
-
 
 Starting 'upload:development'...
 Finished 'upload:development' after 1ms
 
-Revision created successfuly 
+Revision created successfuly
+
 ```
 It will upload your assests to the s3 bucket with uniquely generated file name. 
 ![upload revisions](img/deploy.png)
 
-To get the list of displayed revisions file use following command
+In order to get revision of deployed files we use list command.
 
 >  react-deploy list development
 
 ```
 
 Checking configuration file
-
 Result:
-> react-deploy-cli@0.0.3 deploy /home/suman/react-deploy-cli
-> node ./lib/revisions.js "development"
-
 Starting 'list:development'...
-Finished 'list:development' after 2ms
-
+Finished 'list:development' after 4ms
 ┌───────────────────┬──────────────────────────────┐
 │ RevisionKey       │ Commit Date                  │
 ├───────────────────┼──────────────────────────────┤
-│   index:cba170b   │ 2018/04/03 21:25:34          │
+│   index:01403ec   │ 2018/04/04 14:26:29          │
+├───────────────────┼──────────────────────────────┤
+│   index:527cd76   │ 2018/04/04 14:34:49          │
+├───────────────────┼──────────────────────────────┤
+│   index:6993120   │ 2018/04/04 14:09:03          │
+├───────────────────┼──────────────────────────────┤
+│   index:fa51993   │ 2018/04/04 15:41:51          │
 └───────────────────┴──────────────────────────────┘
  
 ```
-To activate a revision use the revision key.
+To activate a specific version use the activate command followed by key.
 
->  react-deploy activate cba170b development
+>  react-deploy activate fa51993 development
 
 ```
-
 Checking configuration file
-
 Result:
-> react-deploy-cli@0.0.3 deploy /home/suman/react-deploy-cli
-> node ./lib/activate.js "cba170b" "development"
-
-Starting 'list:cba170b'...
-Finished 'list:cba170b' after 2ms
-
-Activating index file of key cba170b
+Starting 'activate:fa51993'...
+Finished 'activate:fa51993' after 6ms
+Activating index file of key fa51993
+Activating service-worker file of key fa51993
+Revision activated successfully
+Revision activated successfully
 
 ```
 
 
 ## Contribute
 
-
-
-Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification. Contributors are welcome
+Contributors are welcome.
+Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification. 
 
 ## License
 

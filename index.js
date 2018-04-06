@@ -95,7 +95,7 @@ program
     };
     var scriptPath = path.join(appRoot, 'lib/revisions.js');
     var setupCommand  = 'node ' + scriptPath + ' ' + cmd
-    exec(setupCommand,output);exec(setupCommand,output);
+    exec(setupCommand,output);
     // let parameterizedCommand = 'npm run list ' + cmd;
     // exec(parameterizedCommand,output);
   }
@@ -123,7 +123,7 @@ program
      
     var scriptPath = path.join(appRoot, 'lib/activate.js');
     var setupCommand  = 'node ' + scriptPath + ' ' +cmd + ' ' + opt
-    exec(setupCommand,output);exec(setupCommand,output);
+    exec(setupCommand,output);
     // let parameterizedCommand = 'npm run activate ' + cmd + ' ' + opt;
     // exec(parameterizedCommand,output);
   }
