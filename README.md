@@ -56,7 +56,7 @@ yarn global add react-deploy-cli
 
 
 ```
- To initialize setup file for react-deploy , go inside your react app project root directory and  use following command 
+ To initialize setup file for `react-deploy` , go inside your react app project root directory and  use following command 
 
 > react-deploy setup
 ```
@@ -76,7 +76,7 @@ Result:
 
 
 ```
-It will automatically create a deploy.js file. Now inside deploy.js file put your s3 bucket name, along with ACCESSKEYID and SECERETKEY.
+It will automatically create a deploy.js file. Now inside deploy.js file put your s3 bucket name, along with `ACCESSKEYID` and `SECERETKEY`.
 
 After building your react app. It's time to deploy your app to S3 bucket.
 
@@ -94,7 +94,7 @@ Finished 'upload:development' after 1ms
 Revision created successfuly
 
 ```
-It will upload your assests to the s3 bucket with uniquely generated file name. 
+It will upload your assests to the `s3` bucket with uniquely generated file name. 
 ![upload revisions](img/deploy.png)
 
 In order to get revision of deployed files we use list command.
@@ -140,7 +140,7 @@ Revision activated successfully
 ## Contribute
 
 Contributors are welcome.
-Small note: If editing the README, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification. 
+Small note: If editing the `README`, please conform to the [standard-readme](https://github.com/RichardLitt/standard-readme) specification. 
 
 ## License
 
